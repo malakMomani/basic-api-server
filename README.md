@@ -5,6 +5,6 @@
 
 [Github Repo](https://github.com/malakMomani/basic-api-server)
 
-[Pull Request]()
+[Pull Request](https://github.com/malakMomani/basic-api-server/pull/1)
 
-[heroku URL]()
+[heroku URL](https://malak-basic-api.herokuapp.com/)
