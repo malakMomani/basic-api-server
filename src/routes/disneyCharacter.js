@@ -3,9 +3,9 @@
 const express = require('express');
 const superagent = require('superagent');
 const router = express.Router();
- // class
-const Character = require('../models/exchange.js');
-let characterInstance = new Character('Malak');
+
+const DisneyCharacter = require('../models/disneyCharacter.js');
+let characterInstance = new DisneyCharacter();
 
 
 
@@ -31,45 +31,16 @@ function getOneChar(req, res) {
 }
 
 function createChar(req, res) {
-    let obj;
-    const url = `http://api.disneyapi.dev/characters?limit=1`;
-    superagent.get(url).then(result =>{
-        obj = new Character(result.body.data[0].name);
-  }).then(()=>{
+    let obj = req.body;
     let newItem = characterInstance.create(obj);
-    console.log(newItem);
-    // if(newItem) {
-    //     res.status(201).json({
-    //         created : 'Successfull'
-    //     });
-    // }
-    // else {
-    //     res.status(204).json({
-    //         created : 'Unsuccessful'
-    //     })
-    // }
-  }).catch(error =>{
-      console.log('ERROR: ', error.message, error.status);
-  });
-    // use create Method from the class
-    
-    
+    res.status(201).json(newItem);
 }
 
 function updateitem(req, res) {
     let id = parseInt(req.params.id);
     const obj = req.body;
-    let updatedRate = characterInstance.update(id, obj);
-    if(updatedRate) {
-        res.status(200).json({
-            created : 'Successfull'
-        });
-    }
-    else {
-        res.status(204).json({
-            created : 'Unsuccessful'
-        })
-    }
+    let updatedCharacter = characterInstance.update(id, obj);
+    res.status(200).json(updatedCharacter);
 }
 
 function deleteitem(req, res) {
